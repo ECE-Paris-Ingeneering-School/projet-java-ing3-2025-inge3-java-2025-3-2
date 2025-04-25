@@ -18,7 +18,10 @@ public class DemandeurProfilView extends JPanel {
         infosPanel.add(new JScrollPane(infosUtilisateur), BorderLayout.CENTER);
         infosPanel.add(modifierInfos, BorderLayout.SOUTH);
 
-      
+        modifierInfos.addActionListener(e ->
+                JOptionPane.showMessageDialog(this, "Page de modification des infos personnelles")
+        );
+
         // Historique des candidatures
         JPanel historiquePanel = new JPanel(new BorderLayout());
         historiquePanel.setBorder(BorderFactory.createTitledBorder("Historique de candidatures"));
