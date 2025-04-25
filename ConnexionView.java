@@ -21,6 +21,12 @@ public class ConnexionView extends JPanel {
         btnInscrire = new JButton("S'inscrire");
         btnOublie = new JButton("Mot de passe oublié");
 
+        btnInscrire.addActionListener(e -> parent.navigateTo("inscription"));
+
+        btnConnecter.addActionListener(e -> {
+            parent.navigateTo("profilDemandeur");
+        });
+
         c.gridx = 0;
         c.gridy = 0;
         c.insets = new Insets(5, 5, 5, 5);
