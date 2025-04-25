@@ -14,6 +14,11 @@ public class ApplicationFrame extends JFrame {
         cardLayout = new CardLayout();
         cardPanel = new JPanel(cardLayout);
 
+        try {
+            UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+        } catch (Exception e) {
+            System.err.println("Impossible de charger le Look and Feel Nimbus");
+        }
 
         // Ajout des vues...
         cardPanel.add(new ConnexionView(this), "connexion");
@@ -49,7 +54,15 @@ public class ApplicationFrame extends JFrame {
         cardLayout.show(cardPanel, viewName);
     }
 
-  
+    private void retour() {
+        if (historiqueNavigation.size() > 1) {
+            historiqueNavigation.pop();
+            cardLayout.show(cardPanel, historiqueNavigation.peek());
+        } else {
+            JOptionPane.showMessageDialog(this, "Vous êtes déjà sur la page initiale.");
+        }
+    }
+
     public static void main(String[] args) {
         SwingUtilities.invokeLater(ApplicationFrame::new);
     }
