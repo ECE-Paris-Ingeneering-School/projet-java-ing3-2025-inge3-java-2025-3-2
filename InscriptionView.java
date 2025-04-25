@@ -41,6 +41,12 @@ public class InscriptionView extends JPanel {
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         buttonPanel.add(inscrireButton);
 
+        inscrireButton.addActionListener(e -> {
+            // Implémentation de l'action pour inscrire l'utilisateur
+            JOptionPane.showMessageDialog(this, "Inscription réussie !");
+            parent.navigateTo("connexion"); // Exemple de navigation après inscription
+        });
+
         add(formPanel, BorderLayout.CENTER);
         add(buttonPanel, BorderLayout.SOUTH);
     }
