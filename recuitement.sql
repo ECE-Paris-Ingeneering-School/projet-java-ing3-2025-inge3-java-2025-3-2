@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Apr 25, 2025 at 02:10 PM
+-- Generation Time: Apr 25, 2025 at 02:20 PM
 -- Server version: 5.7.24
 -- PHP Version: 8.0.1
 
@@ -36,6 +36,13 @@ CREATE TABLE `agence` (
   `nomEntreprise` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `agence`
+--
+
+INSERT INTO `agence` (`id`, `id_utilisateur`, `secteurActivite`, `emailContact`, `telephone`, `nomEntreprise`) VALUES
+(200, 2, 'Recrutement IT', 'contact@buzzcutagency.com', '0601020304', 'Buzzcut Agency');
+
 -- --------------------------------------------------------
 
 --
@@ -63,6 +70,13 @@ CREATE TABLE `demandeur` (
   `cv` text,
   `profil` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `demandeur`
+--
+
+INSERT INTO `demandeur` (`idf`, `id`, `cv`, `profil`) VALUES
+(100, 1, 'CV de Loan - Dev Web', 'Développeur web passionné par le java.');
 
 -- --------------------------------------------------------
 
@@ -108,6 +122,14 @@ CREATE TABLE `utilisateur` (
   `motDePasse` varchar(100) DEFAULT NULL,
   `type` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `utilisateur`
+--
+
+INSERT INTO `utilisateur` (`id`, `nom`, `mail`, `motDePasse`, `type`) VALUES
+(1, 'Loan Sournois', 'loan.sournois@mail.com', '123', 'demandeur'),
+(2, 'Mathias Buzzcut', 'mathias.buzzcut@mail.com', '123', 'agence');
 
 --
 -- Indexes for dumped tables
