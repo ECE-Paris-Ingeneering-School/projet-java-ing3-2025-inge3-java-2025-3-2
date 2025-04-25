@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Apr 25, 2025 at 02:20 PM
+-- Generation Time: Apr 25, 2025 at 02:30 PM
 -- Server version: 5.7.24
 -- PHP Version: 8.0.1
 
@@ -58,6 +58,14 @@ CREATE TABLE `candidature` (
   `note` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `candidature`
+--
+
+INSERT INTO `candidature` (`id`, `id_emploi`, `id_demandeur`, `datePostulation`, `statut`, `note`) VALUES
+(400, 300, 100, '2025-04-25', 'En attente', '4.5'),
+(401, 301, 100, '2025-04-25', 'Refusée', '3.8');
+
 -- --------------------------------------------------------
 
 --
@@ -96,6 +104,19 @@ CREATE TABLE `emploi` (
   `datePublication` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `emploi`
+--
+
+INSERT INTO `emploi` (`id`, `id_agence`, `titre`, `description`, `typeContrat`, `categorie`, `remuneration`, `lieu`, `datePublication`) VALUES
+(300, 200, 'Développeur Java', 'Développement d’applications d’entreprise en Java.', 'CDI', 'Informatique', 40000, 'Paris', '2025-04-25'),
+(301, 200, 'Data Analyst Junior', 'Analyse de données pour nos clients finance.', 'CDD', 'Data Science', 35000, 'Lyon', '2025-04-24'),
+(302, 200, 'Développeur Fullstack', 'Développement front-end et back-end pour applications web modernes.', 'CDI', 'Informatique', 42000, 'Paris', '2025-04-25'),
+(303, 200, 'Consultant Cybersécurité', 'Sécurisation des infrastructures informatiques pour nos clients B2B.', 'CDI', 'Sécurité', 45000, 'Rennes', '2025-04-24'),
+(304, 200, 'Chef de projet IT', 'Gestion de projets digitaux et pilotage d\'équipes techniques.', 'CDI', 'Gestion de projet', 47000, 'Lyon', '2025-04-23'),
+(305, 200, 'Technicien support informatique', 'Support utilisateur et maintenance de parc informatique.', 'CDD', 'Support', 28000, 'Marseille', '2025-04-22'),
+(306, 200, 'Ingénieur Cloud', 'Déploiement et gestion d\'infrastructures cloud (AWS, Azure).', 'CDI', 'Cloud Computing', 50000, 'Toulouse', '2025-04-21');
+
 -- --------------------------------------------------------
 
 --
@@ -108,6 +129,14 @@ CREATE TABLE `statistique` (
   `nombreVue` int(11) DEFAULT NULL,
   `nombrePostulation` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `statistique`
+--
+
+INSERT INTO `statistique` (`id`, `id_emploi`, `nombreVue`, `nombrePostulation`) VALUES
+(500, 300, 120, 15),
+(501, 301, 80, 8);
 
 -- --------------------------------------------------------
 
