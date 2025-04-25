@@ -14,9 +14,9 @@ public class LoginController {
             throw new IllegalArgumentException("Email ou mot de passe ne peut pas être nul.");
         }
 
-        Utilisateur utilisateur = utilisateurDAO.getByEmail(email); // demande au DAO de retrouver dans la BDD le compte lié à cet email.
+        Utilisateur utilisateur = utilisateurDAO.getByEmail(email); // a coder dans la partie dao, qui renvoie l'objet Utilisateur correspondant à l'email, ou null si non trouvé.
         if (utilisateur != null && utilisateur.getMdp().equals(mdp)) { // si utilisateur trouver et mdp valide 
-            return utilisateur;
+            return utilisateur; 
         }
         return null; // Mauvais identifiants
     }
