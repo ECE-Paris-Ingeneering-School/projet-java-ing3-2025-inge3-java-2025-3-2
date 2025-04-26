@@ -1,47 +1,123 @@
-package Dao;
-
-// import des packages
-import Modele.Client;
-import java.util.ArrayList;
-
-/**
- * On utilise une interface ClientDao pour définir les méthodes d'accès aux données de la table clients,
- * indépendamment de la méthode de stockage. On indique juste des noms de méthodes ici.
- */
-public interface ClientDAO {
-    /**
-     * Récupérer de la base de données tous les objets des clients dans une liste
-     * @return : liste retournée des objets des clients récupérés
-     */
-    public ArrayList<Client> getAll();
-
-    /**
-     Ajouter un nouveau client en paramètre dans la base de données
-     @params : client = objet de Client à insérer dans la base de données
-     */
-    public void ajouter(Client client) ;
-
-    /**
-     * Permet de chercher et récupérer un objet de Client dans la base de données via son id en paramètre
-     * @param : id
-     * @return : objet de classe Client cherché et retourné
-     */
-    public Client chercher(int id);
-
-    /**
-     * Permet de modifier les données du nom de l'objet de la classe Client en paramètre
-     * dans la base de données à partir de l'id de cet objet en paramètre
-     * @param : client = objet en paramètre de la classe Client à mettre à jour
-     * @return : objet client en paramètre mis à jour  dans la base de données à retourner
-     */
-    public Client modifier(Client client);
-
-    /**
-     * Supprimer un objet de la classe Client en paramètre dans la base de données en respectant la contrainte
-     * d'intégrité référentielle : en supprimant un client, supprimer aussi en cascade toutes les commandes de la
-     * table commander qui ont l'id du client supprimé.
-     * @params : client = objet de Client en paramètre à supprimer de la base de données
-     */
-    public void supprimer (Client client);
-
+@startuml
+class Dao.ClientDAOImpl {
+- DaoFactory daoFactory
++ ArrayList<Client> getAll()
++ void ajouter(Client)
++ Client chercher(int)
++ Client modifier(Client)
++ void supprimer(Client)
 }
+
+
+class Modele.Commander {
+- int clientId
+- int produitId
+    - int quantite
+    + int getClientId()
++ int getProduitId()
++ int getQuantite()
+}
+
+
+class Vue.VueCommander {
++ void afficherCommande(Commander,DaoFactory)
++ void afficherListeCommandes(ArrayList<Commander>,DaoFactory)
+}
+
+class Modele.Produit {
+- int produitId
+- String produitNom
+- double produitPrix
++ int getProduitId()
++ String getProduitNom()
++ double getProduitPrix()
+}
+
+
+class Dao.ProduitDAOImpl {
+- DaoFactory daoFactory
++ ArrayList<Produit> getAll()
++ void ajouter(Produit)
++ Produit chercher(int)
++ Produit modifier(Produit)
++ void supprimer(Produit)
+}
+
+
+interface Dao.CommanderDAO {
++ ArrayList<Commander> getAll()
++ void ajouter(Commander)
++ Commander chercher(int,int)
++ Commander modifier(Commander)
++ void supprimer(Commander)
+}
+
+class Modele.Client {
+- int clientId
+- String clientNom
+- String clientMail
++ int getClientId()
++ String getclientNom()
++ String getclientMail()
+}
+
+
+class Dao.CommanderDAOImpl {
+- DaoFactory daoFactory
++ ArrayList<Commander> getAll()
++ void ajouter(Commander)
++ Commander chercher(int,int)
++ Commander modifier(Commander)
++ void supprimer(Commander)
+}
+
+
+class Vue.VueClient {
++ void afficherClient(Client)
++ void afficherListeClients(ArrayList<Client>)
+}
+
+class Vue.VueProduit {
++ void afficherProduit(Produit)
++ void afficherListeProduits(ArrayList<Produit>)
+}
+
+interface Dao.ClientDAO {
++ ArrayList<Client> getAll()
++ void ajouter(Client)
++ Client chercher(int)
++ Client modifier(Client)
++ void supprimer(Client)
+}
+
+interface Dao.ProduitDAO {
++ ArrayList<Produit> getAll()
++ void ajouter(Produit)
++ Produit chercher(int)
++ Produit modifier(Produit)
++ void supprimer(Produit)
+}
+
+class Dao.DaoFactory {
+- {static} String url
+- String username
+- String password
++ {static} DaoFactory getInstance(String,String,String)
++ Connection getConnection()
++ ProduitDAO getProduitDAO()
++ ClientDAO getClientDAO()
++ CommanderDAO getCommanderDAO()
++ void disconnect()
+}
+
+
+class Controleur.Main {
++ {static} void main(String[])
+}
+
+
+
+Dao.ClientDAO <|.. Dao.ClientDAOImpl
+Dao.ProduitDAO <|.. Dao.ProduitDAOImpl
+Dao.CommanderDAO <|.. Dao.CommanderDAOImpl
+@enduml
