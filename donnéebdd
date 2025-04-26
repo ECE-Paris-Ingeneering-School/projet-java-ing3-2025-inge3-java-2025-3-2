@@ -1,0 +1,51 @@
+-- Ajout de nouveaux utilisateurs pour agences
+INSERT INTO utilisateur (id, nom, mail, motDePasse, type, dateCreation) VALUES
+(3, 'Reduction Paff', 'contact@reductionpaff.com', '123', 'agence', '26/04/2025'),
+(4, 'Bouc Moustache', 'contact@boucmoustache.com', '123', 'agence', '26/04/2025'),
+(5, 'Thale', 'contact@thale.com', '123', 'agence', '26/04/2025'),
+(6, 'Ariane', 'contact@ariane.com', '123', 'agence', '26/04/2025'),
+(7, 'ECE', 'contact@ece.com', '123', 'agence', '26/04/2025');
+
+-- Ajout des nouvelles agences
+INSERT INTO agence (id, id_utilisateur, secteurActivite, emailContact, telephone, nomEntreprise) VALUES
+(201, 3, 'Evénementiel', 'contact@reductionpaff.com', '0600000001', 'ReductionPaff'),
+(202, 4, 'Marketing', 'contact@boucmoustache.com', '0600000002', 'BoucMoustache'),
+(203, 5, 'Aéronautique', 'contact@thale.com', '0600000003', 'Thale'),
+(204, 6, 'Spatial', 'contact@ariane.com', '0600000004', 'Ariane'),
+(205, 7, 'Éducation', 'contact@ece.com', '0600000005', 'ECE');
+
+-- Ajout des nouveaux emplois liés aux agences
+INSERT INTO emploi (id, id_agence, titre, description, typeContrat, categorie, remuneration, lieu, datePublication) VALUES
+(307, 201, 'Chargé d\'événementiel', 'Organisation et coordination d\'événements pour entreprises et particuliers.', 'CDD', 'Communication', 30000, 'Paris', '2025-04-26'),
+(308, 202, 'Chef de projet marketing', 'Création et suivi de campagnes marketing digitales innovantes.', 'CDI', 'Marketing', 42000, 'Lyon', '2025-04-26'),
+(309, 203, 'Ingénieur Systèmes Aéronautiques', 'Conception et maintenance de systèmes embarqués pour l\'aéronautique.', 'CDI', 'Aéronautique', 55000, 'Toulouse', '2025-04-26'),
+(310, 204, 'Ingénieur Propulsion Spatiale', 'Développement de moteurs pour lanceurs spatiaux.', 'CDI', 'Spatial', 60000, 'Paris', '2025-04-26'),
+(311, 205, 'Chargé de projet pédagogique', 'Développement de modules de formation pour étudiants en ingénierie.', 'CDD', 'Éducation', 32000, 'Paris', '2025-04-26');
+
+-- Ajout de nouveaux utilisateurs pour demandeurs
+INSERT INTO utilisateur (id, nom, mail, motDePasse, type, dateCreation) VALUES
+(8, 'Mathias Bressom', 'mathias.bressom@mail.com', '123', 'demandeur', '26/04/2025'),
+(9, 'François Stephan', 'francois.stephan@mail.com', '123', 'demandeur', '26/04/2025'),
+(10, 'Palasi Julienne', 'palasi.julienne@mail.com', '123', 'demandeur', '26/04/2025');
+
+-- Ajout des nouveaux demandeurs
+INSERT INTO demandeur (idf, id, cv, profil) VALUES
+(101, 8, 'CV de Mathias Bressom - Analyste Données', 'Passionné par l’analyse et la visualisation de données.'),
+(102, 9, 'CV de François Stephan - Ingénieur Système', 'Expérimenté dans la conception de systèmes embarqués et l’aéronautique.'),
+(103, 10, 'CV de Palasi Julienne - Chargée de Communication', 'Spécialisée en communication digitale et organisation événementielle.');
+
+-- Ajout des candidatures des nouveaux demandeurs
+INSERT INTO candidature (id, id_emploi, id_demandeur, datePostulation, statut, note) VALUES
+(402, 308, 101, '2025-04-26', 'En attente', '4.2'),
+(403, 309, 102, '2025-04-26', 'En attente', '4.7'),
+(404, 307, 103, '2025-04-26', 'En attente', '4.1'),
+(405, 310, 102, '2025-04-26', 'En attente', '4.6'),
+(406, 311, 103, '2025-04-26', 'En attente', '4.3');
+
+-- Ajout des statistiques pour les nouveaux emplois
+INSERT INTO statistique (id, id_emploi, nombreVue, nombrePostulation) VALUES
+(502, 307, 90, 5),
+(503, 308, 120, 6),
+(504, 309, 75, 4),
+(505, 310, 60, 3),
+(506, 311, 85, 4);
