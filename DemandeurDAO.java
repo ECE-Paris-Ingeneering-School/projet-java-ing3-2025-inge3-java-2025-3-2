@@ -1,24 +1,26 @@
 package DAO;
 
-import modele.Demandeur;
+import Modele.Demandeur;
 import java.sql.*;
 
 public class DemandeurDAO {
 
-    public Demandeur getById(int id) {
-        String query = "SELECT * FROM Demandeur WHERE ID_Demandeur = ?";
+    public Demandeur getByIdf(int idf) {
+        String query = "SELECT * FROM demandeur WHERE idf = ?";
         try (Connection conn = ConnexionDB.getConnection();
              PreparedStatement ps = conn.prepareStatement(query)) {
 
-            ps.setInt(1, id);
+            ps.setInt(1, idf);
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
                 return new Demandeur(
-                        rs.getInt("ID_Demandeur"),
-                        null, null, null,
-                        rs.getString("CV"),
-                        rs.getString("Profil")
+                        rs.getInt("idf"),
+                        null,
+                        null,
+                        null,
+                        rs.getString("cv"),
+                        rs.getString("profil")
                 );
             }
         } catch (SQLException e) {
