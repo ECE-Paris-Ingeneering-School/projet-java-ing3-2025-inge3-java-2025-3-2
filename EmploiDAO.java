@@ -27,3 +27,46 @@ public class EmploiDAO {
         }
     }
 
+    public void delete(int id) {
+        String query = "DELETE FROM Emploi WHERE ID_Emploi = ?";
+        try (Connection conn = ConnexionDB.getConnection();
+             PreparedStatement ps = conn.prepareStatement(query)) {
+
+            ps.setInt(1, id);
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public List<Emploi> getByCategorieAndLieu(String categorie, String lieu) {
+        List<Emploi> emplois = new ArrayList<>();
+        String query = "SELECT * FROM Emploi WHERE Categorie = ? AND Lieu = ?";
+        try (Connection conn = ConnexionDB.getConnection();
+             PreparedStatement ps = conn.prepareStatement(query)) {
+
+            ps.setString(1, categorie);
+            ps.setString(2, lieu);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Emploi emploi = new Emploi(
+                        rs.getInt("ID_Emploi"),
+                        rs.getString("Titre"),
+                        rs.getString("Description"),
+                        rs.getString("Categorie"),
+                        rs.getFloat("Remuneration"),
+                        rs.getString("Lieu"),
+                        rs.getDate("Date_Publication"),
+                        null
+                );
+                emplois.add(emploi);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return emplois;
+    }
+}
