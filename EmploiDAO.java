@@ -1,7 +1,6 @@
 package DAO;
 
-import modele.Emploi;
-import modele.Agence;
+import Modele.Emploi;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +8,7 @@ import java.util.List;
 public class EmploiDAO {
 
     public void insert(Emploi emploi) {
-        String query = "INSERT INTO Emploi (ID_Agence, Titre, Description, Categorie, Remuneration, Lieu, Date_Publication) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO emploi (id_agence, titre, description, typeContrat, categorie, remuneration, lieu, datePublication) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         try (Connection conn = ConnexionDB.getConnection();
              PreparedStatement ps = conn.prepareStatement(query)) {
 
@@ -27,22 +26,9 @@ public class EmploiDAO {
         }
     }
 
-    public void delete(int id) {
-        String query = "DELETE FROM Emploi WHERE ID_Emploi = ?";
-        try (Connection conn = ConnexionDB.getConnection();
-             PreparedStatement ps = conn.prepareStatement(query)) {
-
-            ps.setInt(1, id);
-            ps.executeUpdate();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
     public List<Emploi> getByCategorieAndLieu(String categorie, String lieu) {
         List<Emploi> emplois = new ArrayList<>();
-        String query = "SELECT * FROM Emploi WHERE Categorie = ? AND Lieu = ?";
+        String query = "SELECT * FROM emploi WHERE categorie = ? AND lieu = ?";
         try (Connection conn = ConnexionDB.getConnection();
              PreparedStatement ps = conn.prepareStatement(query)) {
 
@@ -52,21 +38,31 @@ public class EmploiDAO {
 
             while (rs.next()) {
                 Emploi emploi = new Emploi(
-                        rs.getInt("ID_Emploi"),
-                        rs.getString("Titre"),
-                        rs.getString("Description"),
-                        rs.getString("Categorie"),
-                        rs.getFloat("Remuneration"),
-                        rs.getString("Lieu"),
-                        rs.getDate("Date_Publication"),
+                        rs.getInt("id"),
+                        rs.getString("titre"),
+                        rs.getString("description"),
+                        rs.getString("categorie"),
+                        rs.getFloat("remuneration"),
+                        rs.getString("lieu"),
+                        rs.getDate("datePublication"),
                         null
                 );
                 emplois.add(emploi);
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return emplois;
+    }
+
+    public void delete(int id) {
+        String query = "DELETE FROM emploi WHERE id = ?";
+        try (Connection conn = ConnexionDB.getConnection();
+             PreparedStatement ps = conn.prepareStatement(query)) {
+            ps.setInt(1, id);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
