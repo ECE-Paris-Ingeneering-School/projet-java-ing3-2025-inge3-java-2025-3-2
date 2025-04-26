@@ -1,8 +1,8 @@
 package DAO;
 
-import modele.Candidature;
-import modele.Demandeur;
-import modele.Emploi;
+import Modele.Candidature;
+import Modele.Demandeur;
+import Modele.Emploi;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +10,7 @@ import java.util.List;
 public class CandidatureDAO {
 
     public void insert(Candidature candidature) {
-        String query = "INSERT INTO Candidature (ID_Emploi, ID_Demandeur, Date_Postulation, Statut, Note) VALUES (?, ?, ?, ?, ?)";
+        String query = "INSERT INTO candidature (id_emploi, id_demandeur, datePostulation, statut, note) VALUES (?, ?, ?, ?, ?)";
         try (Connection conn = ConnexionDB.getConnection();
              PreparedStatement ps = conn.prepareStatement(query)) {
 
@@ -28,7 +28,7 @@ public class CandidatureDAO {
 
     public List<Candidature> getByDemandeur(Demandeur demandeur) {
         List<Candidature> candidatures = new ArrayList<>();
-        String query = "SELECT * FROM Candidature WHERE ID_Demandeur = ?";
+        String query = "SELECT * FROM candidature WHERE id_demandeur = ?";
         try (Connection conn = ConnexionDB.getConnection();
              PreparedStatement ps = conn.prepareStatement(query)) {
 
@@ -38,12 +38,12 @@ public class CandidatureDAO {
             while (rs.next()) {
                 Candidature candidature = new Candidature(
                         demandeur,
-                        new Emploi(rs.getInt("ID_Emploi"), null, null, null, 0, null, null, null)
+                        new Emploi(rs.getInt("id_emploi"), null, null, null, 0, null, null, null)
                 );
-                candidature.setId(rs.getInt("ID_Candidature"));
-                candidature.setDatePostulation(rs.getDate("Date_Postulation"));
-                candidature.setStatut(rs.getString("Statut"));
-                candidature.setNote(rs.getString("Note"));
+                candidature.setId(rs.getInt("id"));
+                candidature.setDatePostulation(rs.getDate("datePostulation"));
+                candidature.setStatut(rs.getString("statut"));
+                candidature.setNote(rs.getString("note"));
                 candidatures.add(candidature);
             }
 
