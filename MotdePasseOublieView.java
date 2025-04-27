@@ -1,3 +1,5 @@
+package View;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -13,7 +15,10 @@ public class MotDePasseOublieView extends JPanel {
         mailField = new JTextField(20);
         envoyerLien = new JButton("Envoyer lien");
 
-        envoyerLien.addActionListener(e -> JOptionPane.showMessageDialog(this, "Lien envoyé à " + mailField.getText()));
+        envoyerLien.addActionListener(e -> {
+            JOptionPane.showMessageDialog(this, "Lien envoyé à " + mailField.getText());
+            parent.navigateTo("connexion"); // Optionnel : retour après envoi
+        });
 
         JPanel panel = new JPanel(new FlowLayout());
         panel.add(mailField);
